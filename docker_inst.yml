@@ -12,9 +12,12 @@
         name: docker
         state: started
       register: doc_ser
-    - debug:
+    - name: Debugging success status
+      debug:
         msg: "Docker service running successfully"
-      when: doc_ser.state is "started"
-    - debug:
+      when: doc_ser.status.SubState == "running"
+    - name: Debugging failure status
+      debug:
         msg: "Docker service failed to run"
-      when: doc_ser.state is not "started"
+      when: doc_ser.status.SubState != "running"
+
