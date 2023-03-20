@@ -10,8 +10,8 @@ pipeline {
         stage('Install and Configure Docker') {
             steps {
                 echo 'Installing the puppet agent'
-                sh 'yum -y install puppet-agent'
-                sh '/opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true'
+                sh 'sudo yum -y install puppet-agent'
+                sh 'sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true'
             }
         }
         stage('Build') {
