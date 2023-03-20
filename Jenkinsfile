@@ -4,14 +4,14 @@ pipeline {
         stage('Configure Deploy Puppet agent') {
             steps {
                 echo 'Installing the puppet agent'
-                sh 'ansible-playbook ./docker_inst.yml'
+                sh 'sudo yum -y install puppet-agent'
+                sh 'sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true'
             }
         }
         stage('Install and Configure Docker') {
             steps {
                 echo 'Installing the puppet agent'
-                sh 'sudo yum -y install puppet-agent'
-                sh 'sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true'
+                sh 'ansible-playbook ./docker_inst.yml'
             }
         }
         stage('Build') {
