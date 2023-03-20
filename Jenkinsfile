@@ -11,7 +11,7 @@ pipeline {
 		#sudo yum remove puppetlabs-release-22.0-2.noarch -y;fi
 		sudo yum -y install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 		fi
-		if [ "$(puppet -V)" == ""];
+		if [ "$(puppet -V)" == "" ];
 		then
 		sudo yum -y install puppet;
 		fi
