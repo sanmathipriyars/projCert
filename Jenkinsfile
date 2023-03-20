@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Install and Configure Docker') {
             steps {
-                echo 'Installing the puppet agent'
+                echo 'Installing Docker using ansible'
                 sh 'ansible-playbook ./docker_inst.yml'
             }
         }
