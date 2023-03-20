@@ -3,11 +3,15 @@
   hosts: localhost
   gather_facts: no
   tasks:
+#    - name: Install docker
+#      yum:
+#        name: docker
+#        state: present
+#      register: ins_stat
     - name: Install docker
-      yum:
-        name: docker
-        state: present
-      register: ins_stat
+      shell: |
+        docker --version
+        if [ $? -ne 0 ];then yum install docker -y;fi
     - name: Start docker service
       service:
         name: docker
