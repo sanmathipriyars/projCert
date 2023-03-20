@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Displays site name.
+ * Displays site name for application
  */
 function siteName()
 {
