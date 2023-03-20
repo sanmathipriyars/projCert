@@ -6,6 +6,7 @@ pipeline {
                 echo 'Installing the puppet agent'
                 sh '''whoami
 		ip=$(hostname -I | awk '{print $1}')
+		if [ "$(yum list installed|grep pup)" != "" ];then sudo yum remove puppetlabs-release-22.0-2.noarch -y;fi
 		sudo yum -y install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 		sudo yum -y install puppet
 		sudo echo '$ip puppet.example.com  puppet' > /etc/hosts
