@@ -28,10 +28,10 @@ pipeline {
             }
             post {
                 failure {
-                  sh "echo 'Removing container'"
+                  sh "echo 'Removing container'
                   cont_id=$(docker ps | grep webapp|awk '{print $1}')
                   docker stop $cont_id
-				  docker stop $cont_id
+		  docker rm $cont_id"
                 }
             }
         }
