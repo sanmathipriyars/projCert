@@ -11,8 +11,13 @@ pipeline {
 		#sudo yum remove puppetlabs-release-22.0-2.noarch -y;fi
 		sudo yum -y install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 		fi
-		sudo yum -y install puppet
-		sudo echo '$ip puppet.example.com  puppet' > /etc/hosts
+		if [ "$(puppet -V)" == ""];
+		then
+		sudo yum -y install puppet;
+		fi
+		if [ "$(cat /etc/hosts"|grep puppet)" == "" ];then
+		sudo echo "$ip puppet.example.com  puppet" > /etc/hosts
+		fi
 		sudo systemctl enable --now puppet
 		systemctl status puppet'''
             }
