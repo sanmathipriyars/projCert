@@ -1,6 +1,7 @@
 ---
 - name: install docker
   hosts: localhost
+  gather_facts: no
   tasks:
     - name: Install docker
       yum:
