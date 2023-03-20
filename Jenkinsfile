@@ -15,7 +15,7 @@ pipeline {
 		then
 		sudo yum -y install puppet;
 		fi
-		if [ "$(cat /etc/hosts"|grep puppet)" == "" ];then
+		if [ "$(cat /etc/hosts|grep puppet)" == "" ];then
 		sudo echo "$ip puppet.example.com  puppet" > /etc/hosts
 		fi
 		sudo systemctl enable --now puppet
