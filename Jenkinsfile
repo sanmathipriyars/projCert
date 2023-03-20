@@ -48,8 +48,13 @@ pipeline {
                 failure {
                   sh ''' echo 'Removing container'
                   cont_id=$(docker ps | grep webapp|awk '{print $1}')
+		  if [ -z $cont_id ];
+		  then
                   docker stop $cont_id
-		  docker rm $cont_id '''
+		  docker rm $cont_id
+		  else
+		  echo "No container found"
+		  fi'''
                 }
             }
         }
