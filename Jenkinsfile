@@ -25,7 +25,11 @@ pipeline {
         stage('Install and Configure Docker') {
             steps {
                 echo 'Installing Docker using ansible'
-                sh 'ansible-playbook ./docker_inst.yml'
+                sh '''
+		if [ "$(docker --version)" == "" ];
+		then
+		ansible-playbook ./docker_inst.yml
+		fi'''
             }
         }
         stage('Build') {
