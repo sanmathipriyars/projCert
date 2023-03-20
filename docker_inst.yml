@@ -1,0 +1,20 @@
+---
+- name: install docker
+  hosts: localhost
+  tasks:
+    - name: Install docker
+      yum:
+        name: docker
+        state: present
+      register: ins_stat
+    - name: Start docker service
+      service:
+        name: docker
+        state: started
+      register: doc_ser
+    - debug:
+        msg: "Docker service running successfully"
+      when: doc_ser.state is "started"
+    - debug:
+        msg: "Docker service failed to run"
+      when: doc_ser.state is not "started"
