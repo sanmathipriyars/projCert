@@ -4,7 +4,7 @@ pipeline {
         stage('Configure Deploy Puppet agent') {
             steps {
                 echo 'Installing the puppet agent'
-                sh 'sudo yum -y install puppet-agent'
+                sh 'whoami;sudo yum -y install puppet-agent'
                 sh 'sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true'
             }
         }
