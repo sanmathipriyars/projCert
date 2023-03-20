@@ -4,8 +4,13 @@ pipeline {
         stage('Configure Deploy Puppet agent') {
             steps {
                 echo 'Installing the puppet agent'
-                sh 'whoami;sudo yum -y install puppet-agent'
-                sh 'sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true'
+                sh '''whoami
+		ip=$(hostname -I | awk '{print $1}')
+		sudo yum -y install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+		sudo yum -y install puppet
+		sudo echo '$ip puppet.example.com  puppet' > /etc/hosts
+		sudo systemctl enable --now puppet
+		systemctl status puppet'''
             }
         }
         stage('Install and Configure Docker') {
